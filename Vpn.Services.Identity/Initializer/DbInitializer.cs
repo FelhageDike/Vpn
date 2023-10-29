@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Vpn.Services.Identity.DbContexts;
 using Vpn.Services.Identity.Models;
 
@@ -22,6 +23,7 @@ public class DbInitializer : IDbInitializer
 
     public void Initialize()
     {
+        _context.Database.Migrate();
         if (_roleManager.FindByNameAsync(SD.Admin).Result == null)
         {
             _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
