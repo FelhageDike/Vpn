@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Vpn.Services.Identity.Pages.Redirect;
+namespace Vpn.Pages.Redirect;
 
 [AllowAnonymous]
 public class IndexModel : PageModel

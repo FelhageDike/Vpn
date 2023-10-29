@@ -2,7 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Vpn.Services.Identity.Pages.Home;
+namespace Vpn.Pages.Home;
 
 [AllowAnonymous]
 public class Index : PageModel

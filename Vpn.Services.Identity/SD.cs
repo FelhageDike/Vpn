@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using IdentityModel;
 
 namespace Vpn.Services.Identity;
 
@@ -19,37 +20,38 @@ public static class SD
     public static IEnumerable<ApiScope> ApiScopes =>
         new List<ApiScope>
         {
-            new ApiScope("Vpn", "Vpn Server"),
-            new ApiScope("read", "read your data"),
-            new ApiScope("write", "write your data"),
-            new ApiScope("Delete", "Delete your data"),
+            new ApiScope("mango", "Mango Server"),
+            new ApiScope("read", "read"),
+            new ApiScope("write", "write"),
+            new ApiScope("delete", "delete"),
         };
-
-    public static IEnumerable<Client> Clients =>
-        new List<Client>
+    
+    public static IEnumerable<Client> Clients => 
+    new List<Client>
+    {
+        new Client
         {
-            new Client
+            ClientId = "client",
+            ClientSecrets = {new Secret("secret".Sha256())},
+            AllowedGrantTypes = GrantTypes.ClientCredentials,
+            AllowedScopes = {"read", "write", "profile"}
+        }, 
+        new Client
+        {
+            ClientId = "mango",
+            ClientSecrets = {new Secret("secret".Sha256())},
+            AllowedGrantTypes = GrantTypes.Code,
+            RedirectUris = {"https://localhost:7273/signin-oidc"},
+            PostLogoutRedirectUris = {"https://localhost:44378/signout-callback-oidc"},
+            AllowedScopes = new List<string>
             {
-                ClientId = "client",
-                ClientSecrets = { new Secret("secret".Sha256()) },
-                AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
-                AllowedScopes = { "read", "write", "profile" }
-            },
-            new Client
-            {
-                ClientId = "Vpn",
-                ClientSecrets = { new Secret("secret".Sha256()) },
-                AllowedGrantTypes = GrantTypes.Code,
-                RedirectUris = { "https://localhost:7273/signin-oidc" },
-                PostLogoutRedirectUris = { "https://localhost:7273/signout-callback-oidc" },
-                AllowedScopes = new List<string>
-                {
-                    IdentityServerConstants.StandardScopes.OpenId, // For UserInfo endpoint.
-                    IdentityServerConstants.StandardScopes.Profile,
-                    IdentityServerConstants.StandardScopes.Phone,
-                    IdentityServerConstants.StandardScopes.Email,
-                    "Vpn"
-                }
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                IdentityServerConstants.StandardScopes.Email,
+                "mango"
             }
-        };
+        },
+        
+        
+    };
 }

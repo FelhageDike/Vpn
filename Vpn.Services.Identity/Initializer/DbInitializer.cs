@@ -12,6 +12,7 @@ public class DbInitializer : IDbInitializer
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
+
     public DbInitializer(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _context = context;
@@ -31,17 +32,17 @@ public class DbInitializer : IDbInitializer
             return;
         }
 
-        ApplicationUser adminUser = new ApplicationUser()
+        var adminUser = new ApplicationUser()
         {
-            UserName = "123",
-            Email = "Admin@mail.ru",
+            UserName = "adminUser",
+            Email = "adminUser@mail.ru",
             EmailConfirmed = true,
-            PhoneNumber = "89378888888",
-            FirstName = "asdasd",
-            LastName = "asdasd",
+            PhoneNumber = "89898789098",
+            FirstName ="vlad",
+            LastName = "adminUser"
         };
-       _userManager.CreateAsync(adminUser, "FelhageDike1!").GetAwaiter().GetResult();
-        _userManager.AddToRoleAsync(adminUser, SD.Customer).GetAwaiter().GetResult();
+        _userManager.CreateAsync(adminUser, "FelhageDike1!").GetAwaiter().GetResult();
+        _userManager.AddToRoleAsync(adminUser, SD.Admin).GetAwaiter().GetResult();
 
         var temp1 = _userManager.AddClaimsAsync(adminUser, new Claim[]
         {
@@ -49,19 +50,20 @@ public class DbInitializer : IDbInitializer
             new Claim(JwtClaimTypes.GivenName, adminUser.FirstName),
             new Claim(JwtClaimTypes.FamilyName, adminUser.LastName),
             new Claim(JwtClaimTypes.Role, SD.Admin),
-        });
+        }).Result;
         
-        ApplicationUser customerUser = new ApplicationUser()
+        var customerUser = new ApplicationUser()
         {
-            UserName = "customerUser@mail.ru",
+            UserName = "customerUser",
             Email = "customerUser@mail.ru",
             EmailConfirmed = true,
-            PhoneNumber = "89378888888",
-            FirstName = "4",
-            LastName = "customerUser",
+            PhoneNumber = "89898789098",
+            FirstName ="vlad",
+            LastName = "customerUser"
         };
         _userManager.CreateAsync(customerUser, "FelhageDike1!").GetAwaiter().GetResult();
         _userManager.AddToRoleAsync(customerUser, SD.Customer).GetAwaiter().GetResult();
+
         var temp2 = _userManager.AddClaimsAsync(customerUser, new Claim[]
         {
             new Claim(JwtClaimTypes.Name, customerUser.FirstName + " " + customerUser.LastName),
@@ -69,5 +71,6 @@ public class DbInitializer : IDbInitializer
             new Claim(JwtClaimTypes.FamilyName, customerUser.LastName),
             new Claim(JwtClaimTypes.Role, SD.Customer),
         }).Result;
+        
     }
 }

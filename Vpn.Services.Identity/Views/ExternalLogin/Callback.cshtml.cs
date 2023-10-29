@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Vpn.Services.Identity.Pages.ExternalLogin;
+namespace Vpn.Pages.ExternalLogin;
 
 [AllowAnonymous]
 [SecurityHeaders]

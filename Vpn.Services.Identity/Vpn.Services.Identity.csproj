@@ -14,21 +14,44 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="12.0.1" />
-      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-      <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.3.5" />
-      <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.13" />
-      <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.13" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.13" />
+      <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="5.1.1" />
+      <PackageReference Include="Duende.IdentityServer.Storage" Version="6.3.5" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.0.3" />
-      <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
-      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Vpn.Services.ProductAPI\Vpn.Services.ProductAPI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Account\AccessDenied.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Account\Create\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Account\Login\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Account\Logout\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Account\Logout\LoggedOut.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ServerSideSessions\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Account\AccessDenied.cshtml" />
+      <AdditionalFiles Include="Account\Create\Index.cshtml" />
+      <AdditionalFiles Include="Account\Login\Index.cshtml" />
+      <AdditionalFiles Include="Account\Logout\Index.cshtml" />
+      <AdditionalFiles Include="Account\Logout\LoggedOut.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\Account\AccessDenied.cshtml" />
+      <UpToDateCheckInput Remove="Views\Account\Create\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\Account\Login\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\Account\Logout\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\Account\Logout\LoggedOut.cshtml" />
     </ItemGroup>
 
 </Project>
