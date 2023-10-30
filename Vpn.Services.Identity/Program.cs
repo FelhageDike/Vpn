@@ -73,4 +73,3 @@ using (var scope = app.Services.CreateScope())
     dbInitializer.Initialize();
 }
 
-app.Run();
