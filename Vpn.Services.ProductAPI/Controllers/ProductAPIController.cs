@@ -17,8 +17,7 @@ public class ProductApiController : ControllerBase
         _response = new ResponseDto();
         _productRepository = productRepository;
     }
-
-    [Authorize]
+    
     [HttpGet]
     public async Task<ResponseDto> GetAllProducts()
     {
@@ -37,7 +36,6 @@ public class ProductApiController : ControllerBase
     }
     
     [HttpGet]
-    [Authorize]
     [Route("{productId:guid}")]
     public async Task<ResponseDto> GetById(Guid productId)
     {

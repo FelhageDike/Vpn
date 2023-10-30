@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Logging;
 using Vpn.Web;
 using Vpn.Web.Services;
@@ -9,9 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddHttpClient<IProductServices, ProductService>();
+builder.Services.AddHttpClient<ICartService, CartService>();
 var configuration = builder.Configuration;
 SD.ProductAPIBase = configuration["ServiceUrls:ProductAPI"];
+SD.ShopingCartAPIBase = configuration["ServiceUrls:ShopingCartAPI"];
 builder.Services.AddScoped<IProductServices, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -26,6 +30,8 @@ builder.Services.AddAuthentication(options =>
         options.ClientId = "mango";
         options.ClientSecret = "secret";
         options.ResponseType = "code";
+        options.ClaimActions.MapJsonKey("role", "role", "role");
+        options.ClaimActions.MapJsonKey("sub", "sub", "sub");
         options.TokenValidationParameters.NameClaimType = "name";
         options.TokenValidationParameters.RoleClaimType = "role";
         options.Scope.Add("mango");

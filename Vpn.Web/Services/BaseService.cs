@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net.Http.Headers;
+using System.Text;
 using Newtonsoft.Json;
 using Vpn.Web.Models;
 using Vpn.Web.Services.IServices;
@@ -33,6 +34,10 @@ public class BaseService : IBaseService
                     "application/json");
             }
 
+            if (!string.IsNullOrEmpty(apiRequest.AccessToken))
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.AccessToken);
+            }
             HttpResponseMessage apiResponse = null;
             switch (apiRequest.ApiType)
             {
@@ -51,7 +56,6 @@ public class BaseService : IBaseService
             }
 
             apiResponse = await client.SendAsync(message);
-            
             var apiContent = await apiResponse.Content.ReadAsStringAsync();
             var apiResponseDto = JsonConvert.DeserializeObject<T>(apiContent);
             return apiResponseDto;

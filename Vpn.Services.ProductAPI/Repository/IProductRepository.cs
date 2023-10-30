@@ -1,4 +1,5 @@
 ﻿using Vpn.Services.ProductAPI.Models;
+using Vpn.Services.ProductAPI.Models.Dto;
 
 namespace Vpn.Services.ProductAPI.Repository;
 

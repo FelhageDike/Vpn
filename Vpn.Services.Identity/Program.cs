@@ -1,9 +1,11 @@
+using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Vpn.Services.Identity;
 using Vpn.Services.Identity.DbContexts;
 using Vpn.Services.Identity.Initializer;
 using Vpn.Services.Identity.Models;
+using Vpn.Services.Identity.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,7 +39,7 @@ builder.Services.AddIdentityServer(options =>
     .AddDeveloperSigningCredential();
 
 
-
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
 
 
@@ -61,12 +63,9 @@ app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-});
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 using (var scope = app.Services.CreateScope())
 {
