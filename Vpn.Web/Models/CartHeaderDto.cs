@@ -2,7 +2,8 @@
 
 public class CartHeaderDto
 {
-    public string UserId { get; set; }
+    public int CartHeaderId { get; set; }
+    public Guid UserId { get; set; }
     public string? CouponCode { get; set; }
     public double OrderTotal { get; set; }
 }

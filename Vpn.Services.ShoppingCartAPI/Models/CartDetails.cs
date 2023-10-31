@@ -4,14 +4,12 @@ namespace Vpn.Services.ShoppingCartAPI.Models
 {
     public class CartDetails
     {
-        public Guid CartDetailsId { get; set; }
-        [ForeignKey("CartHeader")]
-        public Guid CartHeaderId { get; set; }
-       
+        public int CartDetailsId { get; set; }
+        public int CartHeaderId { get; set; }
+        [ForeignKey("CartHeaderId")]
         public virtual CartHeader CartHeader { get; set; }
-        [ForeignKey("Product")]
         public Guid ProductId { get; set; }
-       
+        [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
         public int Count { get; set; }
     }

@@ -32,6 +32,8 @@ public class BaseService : IBaseService
             {
                 message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8,
                     "application/json");
+                var a = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8,
+                    "application/json");
             }
 
             if (!string.IsNullOrEmpty(apiRequest.AccessToken))

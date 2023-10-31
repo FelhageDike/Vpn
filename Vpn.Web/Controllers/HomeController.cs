@@ -52,9 +52,9 @@ namespace Vpn.Web.Controllers
         {
             CartDto cartDto = new()
             {
-                CartHeader = new CartHeaderDto
+                CartHeader = new CartHeaderDto()
                 {
-                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
+                    UserId = Guid.Parse(User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value)
                 }
             };
 

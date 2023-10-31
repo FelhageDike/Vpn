@@ -2,19 +2,22 @@
 using Vpn.Services.ShoppingCartAPI.Models;
 using Vpn.Services.ShoppingCartAPI.Models.Dto;
 
-namespace Vpn.Services.ShoppingCartAPI;
-
-public class MappingConfig
+namespace Vpn.Services.ShoppingCartAPI
 {
-    public static MapperConfiguration RegisterMaps()
+    public class MappingConfig
     {
-        var mappingConfig = new MapperConfiguration(config =>
+        public static MapperConfiguration RegisterMaps()
         {
-            config.CreateMap<ProductDto, Product>().ReverseMap();
-            config.CreateMap<CartHeader, CartHeaderDto>().ReverseMap();
-            config.CreateMap<CartDetails, CartDetailsDto>().ReverseMap();
-            config.CreateMap<Cart, CartDto>().ReverseMap();
-        });
-        return mappingConfig;
+            var mappingConfig = new MapperConfiguration(config =>
+            {
+                config.CreateMap<ProductDto, Product>().ReverseMap();
+                config.CreateMap<CartHeader, CartHeaderDto>().ReverseMap();
+                config.CreateMap<CartDetails, CartDetailsDto>().ReverseMap();
+                config.CreateMap<Cart, CartDto>().ReverseMap();
+                config.CreateMap<CartDto, Cart>().ReverseMap();
+            });
+
+            return mappingConfig;
+        }
     }
 }
